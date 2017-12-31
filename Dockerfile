@@ -23,12 +23,12 @@ WORKDIR /usr/local/src/mosquitto-$MOSQUITTOVERSION
 RUN make WITH_WEBSOCKETS=yes binary && mkdir /tmp/mosquitto && \
     DESTDIR=/tmp/mosquitto make install && rm -rf /tmp/mosquitto/usr/local/share
 
-FROM arm64v8/ubuntu:16.04 as builder
-RUN mkdir -p /mosquitto/config /mosquitto/data /mosquitto/log && \
+FROM arm64v8/ubuntu:16.04 
+RUN mkdir -p /usr/local /mosquitto/config /mosquitto/data /mosquitto/log && \
     adduser --system --disabled-password --disabled-login mosquitto && \
     addgroup --system mosquitto && \
     chown -R mosquitto:mosquitto /mosquitto
-COPY --from=builder /tmp/mosquitto/usr/local/* /usr/local/     
+COPY --from=builder /tmp/mosquitto/usr/local/ /usr/local/     
 COPY config /mosquitto/config
 USER  mosquitto
 
@@ -38,4 +38,4 @@ EXPOSE 1883 8833 9001
 COPY docker-entrypoint.sh /
 ENTRYPOINT ["/docker-entrypoint.sh"]
 
-CMD ["mosquitto", "-c", "/mosquitto/config/mosquitto.conf"]
+CMD ["/usr/local/sbin/mosquitto", "-c", "/mosquitto/config/mosquitto.conf"]
