@@ -1,6 +1,6 @@
 Docker Mosquitto for arm64
 =========
-Docker build file for mosquitto on arm64. This docker file is based on
+Docker build file for mosquitto (MQTT) on arm64. This docker file is based on
 ubuntu 16.04 and mosquitto version 1.4.14
 
 
