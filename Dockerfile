@@ -30,8 +30,7 @@ RUN apt-get update && \
     apt-get install -y libssl1.0.0 libc-ares2 libuuid1 libwebsockets7 && \
     apt-get clean
 RUN mkdir -p /usr/local /mosquitto/config /mosquitto/data /mosquitto/log && \
-    adduser --system --disabled-password --disabled-login mosquitto && \
-    addgroup --system mosquitto && \
+    adduser --system -U --disabled-password --disabled-login mosquitto && \
     chown -R mosquitto:mosquitto /mosquitto
 COPY --from=builder /tmp/mosquitto/usr/local/ /usr/local/     
 COPY config /mosquitto/config
