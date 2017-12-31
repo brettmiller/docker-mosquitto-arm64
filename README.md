@@ -13,8 +13,8 @@ docker run --name=mosquitto \
   -p 9001:9001 \
   -v /etc/localtime:/etc/localtime:ro \
   -v /etc/timezone:/etc/timezone:ro \
-  -v /opt/mosquitto.conf:/mosquitto/config \
-  -v /opt/mosquitto/data:/mosquitto/data \
-  -v /opt/mosquitto/log:/mosquitto/log \
+  --mount source=mosquitto-config,destination=/mosquitto/config \
+  --mount source=mosquitto-data,destination=/mosquitto/data \
+  --mount source=mosquitto-log,destination=/mosquitto/log \
   -u mosquitto \
-  mosquitto-arm64 
+  mosquitto-arm64
