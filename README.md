@@ -1,16 +1,20 @@
-Mosquitto
+Docker Mosquitto for arm64
 =========
-[![Docker Build Statu](https://img.shields.io/docker/build/ansi/mosquitto.svg)]()
-[![Docker Pulls](https://img.shields.io/docker/pulls/ansi/mosquitto.svg)]()
-[![](https://badge.imagelayers.io/ansi/mosquitto:latest.svg)]()
-
-Docker build file for mosquitto. This docker file is based on
+Docker build file for mosquitto on arm64. This docker file is based on
 ubuntu 16.04 and mosquitto version 1.4.14
 
-Get it
-======
-sudo docker pull ansi/mosquitto
 
 Run it
 ======
-sudo docker run -p 1883:1883 --name mosquitto -d ansi/mosquitto
+Run it with something like:
+
+docker run --name=mosquitto \
+  -p 1883:1883 \
+  -p 9001:9001 \
+  -v /etc/localtime:/etc/localtime:ro \
+  -v /etc/timezone:/etc/timezone:ro \
+  -v /opt/mosquitto.conf:/mosquitto/config \
+  -v /opt/mosquitto/data:/mosquitto/data \
+  -v /opt/mosquitto/log:/mosquitto/log \
+  -u mosquitto \
+  mosquitto-arm64 
