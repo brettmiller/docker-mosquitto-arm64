@@ -1,0 +1,3 @@
+Place SSL/TLS server keys and certificates in this directory.
+
+This directory should be readable only by the mosquitto user

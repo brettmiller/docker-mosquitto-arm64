@@ -29,6 +29,7 @@ RUN mkdir -p /mosquitto/config /mosquitto/data /mosquitto/log && \
     addgroup --system mosquitto && \
     chown -R mosquitto:mosquitto /mosquitto
 COPY --from=builder /tmp/mosquitto/usr/local/* /usr/local/     
+COPY config /mosquitto/config
 USER  mosquitto
 
 ENV PATH "$PATH:/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin:/bin:/sbin"
