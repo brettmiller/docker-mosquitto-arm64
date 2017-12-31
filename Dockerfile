@@ -24,6 +24,11 @@ RUN make WITH_WEBSOCKETS=yes binary && mkdir /tmp/mosquitto && \
     DESTDIR=/tmp/mosquitto make install && rm -rf /tmp/mosquitto/usr/local/share
 
 FROM arm64v8/ubuntu:16.04 
+ENV DEBIAN_FRONTEND noninteractive
+RUN apt-get update && \
+    apt-get upgrade -y && \
+    apt-get install -y libssl1.0.0 libc-ares2 libuuid1 libwebsockets7 && \
+    apt-get clean
 RUN mkdir -p /usr/local /mosquitto/config /mosquitto/data /mosquitto/log && \
     adduser --system --disabled-password --disabled-login mosquitto && \
     addgroup --system mosquitto && \
